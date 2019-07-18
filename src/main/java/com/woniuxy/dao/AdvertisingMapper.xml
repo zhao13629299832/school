@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.dao.AdvertisingMapper">
+  <resultMap id="BaseResultMap" type="com.woniuxy.entity.Advertising">
+    <id column="advertising_id" jdbcType="VARCHAR" property="advertisingId" />
+    <result column="advertising_name" jdbcType="VARCHAR" property="advertisingName" />
+    <result column="advertising_note" jdbcType="VARCHAR" property="advertisingNote" />
+    <result column="advertising_photo" jdbcType="VARCHAR" property="advertisingPhoto" />
+    <result column="advertising_isdelete" jdbcType="BIT" property="advertisingIsdelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    advertising_id, advertising_name, advertising_note, advertising_photo, advertising_isdelete
+  </sql>
+  <select id="selectByExample" parameterType="com.woniuxy.entity.AdvertisingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from advertising
+    where advertising_id = #{advertisingId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from advertising
+    where advertising_id = #{advertisingId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.woniuxy.entity.AdvertisingExample">
+    delete from advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.woniuxy.entity.Advertising">
+    insert into advertising (advertising_id, advertising_name, advertising_note, 
+      advertising_photo, advertising_isdelete)
+    values (#{advertisingId,jdbcType=VARCHAR}, #{advertisingName,jdbcType=VARCHAR}, #{advertisingNote,jdbcType=VARCHAR}, 
+      #{advertisingPhoto,jdbcType=VARCHAR}, #{advertisingIsdelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniuxy.entity.Advertising">
+    insert into advertising
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="advertisingId != null">
+        advertising_id,
+      </if>
+      <if test="advertisingName != null">
+        advertising_name,
+      </if>
+      <if test="advertisingNote != null">
+        advertising_note,
+      </if>
+      <if test="advertisingPhoto != null">
+        advertising_photo,
+      </if>
+      <if test="advertisingIsdelete != null">
+        advertising_isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="advertisingId != null">
+        #{advertisingId,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingName != null">
+        #{advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingNote != null">
+        #{advertisingNote,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingPhoto != null">
+        #{advertisingPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingIsdelete != null">
+        #{advertisingIsdelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.woniuxy.entity.AdvertisingExample" resultType="java.lang.Long">
+    select count(*) from advertising
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update advertising
+    <set>
+      <if test="record.advertisingId != null">
+        advertising_id = #{record.advertisingId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingName != null">
+        advertising_name = #{record.advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingNote != null">
+        advertising_note = #{record.advertisingNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingPhoto != null">
+        advertising_photo = #{record.advertisingPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advertisingIsdelete != null">
+        advertising_isdelete = #{record.advertisingIsdelete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update advertising
+    set advertising_id = #{record.advertisingId,jdbcType=VARCHAR},
+      advertising_name = #{record.advertisingName,jdbcType=VARCHAR},
+      advertising_note = #{record.advertisingNote,jdbcType=VARCHAR},
+      advertising_photo = #{record.advertisingPhoto,jdbcType=VARCHAR},
+      advertising_isdelete = #{record.advertisingIsdelete,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniuxy.entity.Advertising">
+    update advertising
+    <set>
+      <if test="advertisingName != null">
+        advertising_name = #{advertisingName,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingNote != null">
+        advertising_note = #{advertisingNote,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingPhoto != null">
+        advertising_photo = #{advertisingPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="advertisingIsdelete != null">
+        advertising_isdelete = #{advertisingIsdelete,jdbcType=BIT},
+      </if>
+    </set>
+    where advertising_id = #{advertisingId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniuxy.entity.Advertising">
+    update advertising
+    set advertising_name = #{advertisingName,jdbcType=VARCHAR},
+      advertising_note = #{advertisingNote,jdbcType=VARCHAR},
+      advertising_photo = #{advertisingPhoto,jdbcType=VARCHAR},
+      advertising_isdelete = #{advertisingIsdelete,jdbcType=BIT}
+    where advertising_id = #{advertisingId,jdbcType=VARCHAR}
+  </update>
+</mapper>

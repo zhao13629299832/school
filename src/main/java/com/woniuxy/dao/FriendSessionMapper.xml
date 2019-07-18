@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.dao.FriendSessionMapper">
+  <resultMap id="BaseResultMap" type="com.woniuxy.entity.FriendSession">
+    <id column="friend_session_id" jdbcType="VARCHAR" property="friendSessionId" />
+    <result column="firend_id" jdbcType="VARCHAR" property="firendId" />
+    <result column="friend_session_time" jdbcType="TIMESTAMP" property="friendSessionTime" />
+    <result column="friend_session_fromid" jdbcType="CHAR" property="friendSessionFromid" />
+    <result column="friend_session_toid" jdbcType="CHAR" property="friendSessionToid" />
+    <result column="friend_session_isdelete" jdbcType="BIT" property="friendSessionIsdelete" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.woniuxy.entity.FriendSession">
+    <result column="friend_session_message" jdbcType="LONGVARCHAR" property="friendSessionMessage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    friend_session_id, firend_id, friend_session_time, friend_session_fromid, friend_session_toid, 
+    friend_session_isdelete
+  </sql>
+  <sql id="Blob_Column_List">
+    friend_session_message
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.woniuxy.entity.FriendSessionExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from friend_session
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.woniuxy.entity.FriendSessionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from friend_session
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from friend_session
+    where friend_session_id = #{friendSessionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from friend_session
+    where friend_session_id = #{friendSessionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.woniuxy.entity.FriendSessionExample">
+    delete from friend_session
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.woniuxy.entity.FriendSession">
+    insert into friend_session (friend_session_id, firend_id, friend_session_time, 
+      friend_session_fromid, friend_session_toid, friend_session_isdelete, 
+      friend_session_message)
+    values (#{friendSessionId,jdbcType=VARCHAR}, #{firendId,jdbcType=VARCHAR}, #{friendSessionTime,jdbcType=TIMESTAMP}, 
+      #{friendSessionFromid,jdbcType=CHAR}, #{friendSessionToid,jdbcType=CHAR}, #{friendSessionIsdelete,jdbcType=BIT}, 
+      #{friendSessionMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniuxy.entity.FriendSession">
+    insert into friend_session
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="friendSessionId != null">
+        friend_session_id,
+      </if>
+      <if test="firendId != null">
+        firend_id,
+      </if>
+      <if test="friendSessionTime != null">
+        friend_session_time,
+      </if>
+      <if test="friendSessionFromid != null">
+        friend_session_fromid,
+      </if>
+      <if test="friendSessionToid != null">
+        friend_session_toid,
+      </if>
+      <if test="friendSessionIsdelete != null">
+        friend_session_isdelete,
+      </if>
+      <if test="friendSessionMessage != null">
+        friend_session_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="friendSessionId != null">
+        #{friendSessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="firendId != null">
+        #{firendId,jdbcType=VARCHAR},
+      </if>
+      <if test="friendSessionTime != null">
+        #{friendSessionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="friendSessionFromid != null">
+        #{friendSessionFromid,jdbcType=CHAR},
+      </if>
+      <if test="friendSessionToid != null">
+        #{friendSessionToid,jdbcType=CHAR},
+      </if>
+      <if test="friendSessionIsdelete != null">
+        #{friendSessionIsdelete,jdbcType=BIT},
+      </if>
+      <if test="friendSessionMessage != null">
+        #{friendSessionMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.woniuxy.entity.FriendSessionExample" resultType="java.lang.Long">
+    select count(*) from friend_session
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update friend_session
+    <set>
+      <if test="record.friendSessionId != null">
+        friend_session_id = #{record.friendSessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firendId != null">
+        firend_id = #{record.firendId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendSessionTime != null">
+        friend_session_time = #{record.friendSessionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.friendSessionFromid != null">
+        friend_session_fromid = #{record.friendSessionFromid,jdbcType=CHAR},
+      </if>
+      <if test="record.friendSessionToid != null">
+        friend_session_toid = #{record.friendSessionToid,jdbcType=CHAR},
+      </if>
+      <if test="record.friendSessionIsdelete != null">
+        friend_session_isdelete = #{record.friendSessionIsdelete,jdbcType=BIT},
+      </if>
+      <if test="record.friendSessionMessage != null">
+        friend_session_message = #{record.friendSessionMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update friend_session
+    set friend_session_id = #{record.friendSessionId,jdbcType=VARCHAR},
+      firend_id = #{record.firendId,jdbcType=VARCHAR},
+      friend_session_time = #{record.friendSessionTime,jdbcType=TIMESTAMP},
+      friend_session_fromid = #{record.friendSessionFromid,jdbcType=CHAR},
+      friend_session_toid = #{record.friendSessionToid,jdbcType=CHAR},
+      friend_session_isdelete = #{record.friendSessionIsdelete,jdbcType=BIT},
+      friend_session_message = #{record.friendSessionMessage,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update friend_session
+    set friend_session_id = #{record.friendSessionId,jdbcType=VARCHAR},
+      firend_id = #{record.firendId,jdbcType=VARCHAR},
+      friend_session_time = #{record.friendSessionTime,jdbcType=TIMESTAMP},
+      friend_session_fromid = #{record.friendSessionFromid,jdbcType=CHAR},
+      friend_session_toid = #{record.friendSessionToid,jdbcType=CHAR},
+      friend_session_isdelete = #{record.friendSessionIsdelete,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniuxy.entity.FriendSession">
+    update friend_session
+    <set>
+      <if test="firendId != null">
+        firend_id = #{firendId,jdbcType=VARCHAR},
+      </if>
+      <if test="friendSessionTime != null">
+        friend_session_time = #{friendSessionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="friendSessionFromid != null">
+        friend_session_fromid = #{friendSessionFromid,jdbcType=CHAR},
+      </if>
+      <if test="friendSessionToid != null">
+        friend_session_toid = #{friendSessionToid,jdbcType=CHAR},
+      </if>
+      <if test="friendSessionIsdelete != null">
+        friend_session_isdelete = #{friendSessionIsdelete,jdbcType=BIT},
+      </if>
+      <if test="friendSessionMessage != null">
+        friend_session_message = #{friendSessionMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where friend_session_id = #{friendSessionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.woniuxy.entity.FriendSession">
+    update friend_session
+    set firend_id = #{firendId,jdbcType=VARCHAR},
+      friend_session_time = #{friendSessionTime,jdbcType=TIMESTAMP},
+      friend_session_fromid = #{friendSessionFromid,jdbcType=CHAR},
+      friend_session_toid = #{friendSessionToid,jdbcType=CHAR},
+      friend_session_isdelete = #{friendSessionIsdelete,jdbcType=BIT},
+      friend_session_message = #{friendSessionMessage,jdbcType=LONGVARCHAR}
+    where friend_session_id = #{friendSessionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniuxy.entity.FriendSession">
+    update friend_session
+    set firend_id = #{firendId,jdbcType=VARCHAR},
+      friend_session_time = #{friendSessionTime,jdbcType=TIMESTAMP},
+      friend_session_fromid = #{friendSessionFromid,jdbcType=CHAR},
+      friend_session_toid = #{friendSessionToid,jdbcType=CHAR},
+      friend_session_isdelete = #{friendSessionIsdelete,jdbcType=BIT}
+    where friend_session_id = #{friendSessionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

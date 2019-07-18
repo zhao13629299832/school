@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.dao.UserOrderMapper">
+  <resultMap id="BaseResultMap" type="com.woniuxy.entity.UserOrder">
+    <id column="user_order_id" jdbcType="VARCHAR" property="userOrderId" />
+    <result column="user_phone" jdbcType="CHAR" property="userPhone" />
+    <result column="user_address_id" jdbcType="VARCHAR" property="userAddressId" />
+    <result column="user_order_state" jdbcType="INTEGER" property="userOrderState" />
+    <result column="user_order_creatertime" jdbcType="TIMESTAMP" property="userOrderCreatertime" />
+    <result column="user_order_updatetime" jdbcType="TIMESTAMP" property="userOrderUpdatetime" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="driver_id" jdbcType="VARCHAR" property="driverId" />
+    <result column="user_address_isdelete" jdbcType="BIT" property="userAddressIsdelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_order_id, user_phone, user_address_id, user_order_state, user_order_creatertime, 
+    user_order_updatetime, store_id, driver_id, user_address_isdelete
+  </sql>
+  <select id="selectByExample" parameterType="com.woniuxy.entity.UserOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_order
+    where user_order_id = #{userOrderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_order
+    where user_order_id = #{userOrderId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.woniuxy.entity.UserOrderExample">
+    delete from user_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.woniuxy.entity.UserOrder">
+    insert into user_order (user_order_id, user_phone, user_address_id, 
+      user_order_state, user_order_creatertime, 
+      user_order_updatetime, store_id, driver_id, 
+      user_address_isdelete)
+    values (#{userOrderId,jdbcType=VARCHAR}, #{userPhone,jdbcType=CHAR}, #{userAddressId,jdbcType=VARCHAR}, 
+      #{userOrderState,jdbcType=INTEGER}, #{userOrderCreatertime,jdbcType=TIMESTAMP}, 
+      #{userOrderUpdatetime,jdbcType=TIMESTAMP}, #{storeId,jdbcType=VARCHAR}, #{driverId,jdbcType=VARCHAR}, 
+      #{userAddressIsdelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.woniuxy.entity.UserOrder">
+    insert into user_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userOrderId != null">
+        user_order_id,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userAddressId != null">
+        user_address_id,
+      </if>
+      <if test="userOrderState != null">
+        user_order_state,
+      </if>
+      <if test="userOrderCreatertime != null">
+        user_order_creatertime,
+      </if>
+      <if test="userOrderUpdatetime != null">
+        user_order_updatetime,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="driverId != null">
+        driver_id,
+      </if>
+      <if test="userAddressIsdelete != null">
+        user_address_isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userOrderId != null">
+        #{userOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userAddressId != null">
+        #{userAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrderState != null">
+        #{userOrderState,jdbcType=INTEGER},
+      </if>
+      <if test="userOrderCreatertime != null">
+        #{userOrderCreatertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userOrderUpdatetime != null">
+        #{userOrderUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null">
+        #{driverId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddressIsdelete != null">
+        #{userAddressIsdelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.woniuxy.entity.UserOrderExample" resultType="java.lang.Long">
+    select count(*) from user_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_order
+    <set>
+      <if test="record.userOrderId != null">
+        user_order_id = #{record.userOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.userAddressId != null">
+        user_address_id = #{record.userAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userOrderState != null">
+        user_order_state = #{record.userOrderState,jdbcType=INTEGER},
+      </if>
+      <if test="record.userOrderCreatertime != null">
+        user_order_creatertime = #{record.userOrderCreatertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userOrderUpdatetime != null">
+        user_order_updatetime = #{record.userOrderUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storeId != null">
+        store_id = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.driverId != null">
+        driver_id = #{record.driverId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddressIsdelete != null">
+        user_address_isdelete = #{record.userAddressIsdelete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_order
+    set user_order_id = #{record.userOrderId,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=CHAR},
+      user_address_id = #{record.userAddressId,jdbcType=VARCHAR},
+      user_order_state = #{record.userOrderState,jdbcType=INTEGER},
+      user_order_creatertime = #{record.userOrderCreatertime,jdbcType=TIMESTAMP},
+      user_order_updatetime = #{record.userOrderUpdatetime,jdbcType=TIMESTAMP},
+      store_id = #{record.storeId,jdbcType=VARCHAR},
+      driver_id = #{record.driverId,jdbcType=VARCHAR},
+      user_address_isdelete = #{record.userAddressIsdelete,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.woniuxy.entity.UserOrder">
+    update user_order
+    <set>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userAddressId != null">
+        user_address_id = #{userAddressId,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrderState != null">
+        user_order_state = #{userOrderState,jdbcType=INTEGER},
+      </if>
+      <if test="userOrderCreatertime != null">
+        user_order_creatertime = #{userOrderCreatertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userOrderUpdatetime != null">
+        user_order_updatetime = #{userOrderUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null">
+        driver_id = #{driverId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddressIsdelete != null">
+        user_address_isdelete = #{userAddressIsdelete,jdbcType=BIT},
+      </if>
+    </set>
+    where user_order_id = #{userOrderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.woniuxy.entity.UserOrder">
+    update user_order
+    set user_phone = #{userPhone,jdbcType=CHAR},
+      user_address_id = #{userAddressId,jdbcType=VARCHAR},
+      user_order_state = #{userOrderState,jdbcType=INTEGER},
+      user_order_creatertime = #{userOrderCreatertime,jdbcType=TIMESTAMP},
+      user_order_updatetime = #{userOrderUpdatetime,jdbcType=TIMESTAMP},
+      store_id = #{storeId,jdbcType=VARCHAR},
+      driver_id = #{driverId,jdbcType=VARCHAR},
+      user_address_isdelete = #{userAddressIsdelete,jdbcType=BIT}
+    where user_order_id = #{userOrderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

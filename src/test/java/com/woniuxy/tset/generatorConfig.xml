@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <context id="context1" >
+  	<commentGenerator>
+		<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/school?characterEncoding=gbk" userId="root" password="123456" />
+    <javaModelGenerator targetPackage="com.woniuxy.entity" targetProject=".\src\main\java" ></javaModelGenerator>
+    <sqlMapGenerator targetPackage="com.woniuxy.dao" targetProject=".\src\main\java" ></sqlMapGenerator>
+    <javaClientGenerator targetPackage="com.woniuxy.dao" targetProject=".\src\main\java" type="XMLMAPPER" />
+    
+    <table schema="" tableName="advertising" ></table>
+    <table schema="" tableName="car" ></table>
+    <table schema="" tableName="car_information" ></table>
+    <table schema="" tableName="driver" ></table>
+    <table schema="" tableName="driver_information" ></table>
+    <table schema="" tableName="friend" ></table>
+    <table schema="" tableName="friend_session" ></table>
+    <table schema="" tableName="post" ></table>
+    <table schema="" tableName="post_infomation" ></table>
+    <table schema="" tableName="role" ></table>
+    <table schema="" tableName="roletree" ></table>
+    <table schema="" tableName="shop" ></table>
+    <table schema="" tableName="store" ></table>
+    <table schema="" tableName="store_information" ></table>
+    <table schema="" tableName="store_shop" ></table>
+    <table schema="" tableName="tree" ></table>
+    <table schema="" tableName="user_address" ></table>
+    <table schema="" tableName="user_information" ></table>
+    <table schema="" tableName="user_order" ></table>
+    <table schema="" tableName="userinfo" ></table>
+    <table schema="" tableName="userinforole" ></table>
+    
+    
+
+  </context>
+</generatorConfiguration>
