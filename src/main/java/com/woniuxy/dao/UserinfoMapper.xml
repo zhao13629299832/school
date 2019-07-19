@@ -7,6 +7,15 @@
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_isdelete" jdbcType="BIT" property="userIsdelete" />
   </resultMap>
+  
+  <resultMap type="com.woniuxy.entity.Userinfo" id="findWithTree">
+  	<collection property="trees" column="user_phone" select="com.woniuxy.dao.TreeMapper.findTreeWithUid"></collection>
+  </resultMap>
+  
+  <select id="login" resultMap="findWithTree" parameterType="com.woniuxy.entity.Userinfo">
+  	select * from userinfo where userPhone=#{userPhone} and userPassword={userPhone} and {userIsdelete=false or userIsdelete is null}
+  </select>
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

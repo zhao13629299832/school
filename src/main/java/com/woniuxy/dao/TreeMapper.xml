@@ -9,6 +9,12 @@
     <result column="tree_icon" jdbcType="VARCHAR" property="treeIcon" />
     <result column="tree_isdelete" jdbcType="BIT" property="treeIsdelete" />
   </resultMap>
+  
+  <select id="findTreeWithUid" resultMap="BaseResultMap">
+  	SELECT * FROM tree WHERE tree_id IN(
+	SELECT tree_id FROM roletree WHERE role_id IN
+	(SELECT role_id FROM userinforole WHERE role_id=#{role_id}))
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -1,0 +1,20 @@
+server:
+  port: 8888
+  
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://xawn.f3322.net:3306/db9?characterEncoding=UTF-8
+    username: db9
+    password: 23213123!
+    
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp  
+      
+logging:
+  level:
+    com: 
+      woniu: 
+        mapper: DEBUG
