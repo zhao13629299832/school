@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.woniuxy.dao.UserinfoMapper;
 import com.woniuxy.entity.Userinfo;
-import com.woniuxy.service.ILoginSrevice;
+import com.woniuxy.service.ILoginService;
 
 @Service
-public class LoginSreviceImpl implements ILoginSrevice{
+public class LoginServiceImpl implements ILoginService{
 	
 	@Resource UserinfoMapper userinfoMapper;
 

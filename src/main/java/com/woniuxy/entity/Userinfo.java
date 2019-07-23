@@ -1,7 +1,35 @@
 package com.woniuxy.entity;
 
+import java.util.List;
+
 public class Userinfo {
-    private String userPhone;
+	private List roles;
+	private List trees;
+	
+	
+    @Override
+	public String toString() {
+		return "Userinfo [roles=" + roles + ", trees=" + trees + ", userPhone=" + userPhone + ", userPassword="
+				+ userPassword + ", userName=" + userName + ", userIsdelete=" + userIsdelete + "]";
+	}
+
+	public List getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List roles) {
+		this.roles = roles;
+	}
+
+	public List getTrees() {
+		return trees;
+	}
+
+	public void setTrees(List trees) {
+		this.trees = trees;
+	}
+
+	private String userPhone;
 
     private String userPassword;
 

@@ -2,6 +2,6 @@ package com.woniuxy.service;
 
 import com.woniuxy.entity.Userinfo;
 
-public interface ILoginSrevice {
+public interface ILoginService {
 	public Userinfo login(Userinfo userinfo);
 }

@@ -13,7 +13,7 @@
   </resultMap>
   
   <select id="login" resultMap="findWithTree" parameterType="com.woniuxy.entity.Userinfo">
-  	select * from userinfo where userPhone=#{userPhone} and userPassword={userPhone} and {userIsdelete=false or userIsdelete is null}
+  	select * from userinfo where user_phone=#{userPhone} and user_password=#{userPassword}  and (user_isdelete=false or user_isdelete is null)
   </select>
   
   <sql id="Example_Where_Clause">
