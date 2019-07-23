@@ -6,6 +6,10 @@
     <result column="role_name" jdbcType="INTEGER" property="roleName" />
     <result column="role_isdelete" jdbcType="BIT" property="roleIsdelete" />
   </resultMap>
+  
+  <select id="findByUid" resultMap="BaseResultMap">
+  SELECT * FROM role WHERE role_id IN(SELECT role_id FROM userinforole WHERE user_phone=#{userPhone})
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

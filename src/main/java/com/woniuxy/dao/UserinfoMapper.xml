@@ -6,6 +6,7 @@
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_isdelete" jdbcType="BIT" property="userIsdelete" />
+  	<collection property="roles" column="user_phone" select="com.woniuxy.dao.RoleMapper.findByUid"></collection>
   </resultMap>
   
   <resultMap type="com.woniuxy.entity.Userinfo" id="findWithTree">
@@ -107,7 +108,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.woniuxy.entity.Userinfo">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="userPhone" parameterType="com.woniuxy.entity.Userinfo">
     insert into userinfo (user_phone, user_password, user_name, 
       user_isdelete)
     values (#{userPhone,jdbcType=CHAR}, #{userPassword,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 

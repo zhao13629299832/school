@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TreeMapper {
+	List findTreeWithUid(String userPhone);
+	
     long countByExample(TreeExample example);
 
     int deleteByExample(TreeExample example);

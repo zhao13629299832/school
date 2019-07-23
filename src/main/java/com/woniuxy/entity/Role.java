@@ -3,7 +3,7 @@ package com.woniuxy.entity;
 public class Role {
     private Integer roleId;
 
-    private Integer roleName;
+    private String roleName;
 
     private Boolean roleIsdelete;
 
@@ -15,11 +15,11 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public Integer getRoleName() {
+    public String getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(Integer roleName) {
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
@@ -30,4 +30,10 @@ public class Role {
     public void setRoleIsdelete(Boolean roleIsdelete) {
         this.roleIsdelete = roleIsdelete;
     }
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleIsdelete=" + roleIsdelete + "]";
+	}
+    
 }

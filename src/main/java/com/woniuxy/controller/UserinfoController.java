@@ -26,7 +26,7 @@ public class UserinfoController {
 	public String save(Userinfo userinfo,Integer[] roleIds) {
 		userinfo.setUserPassword(MD5.md5s(userinfo.getUserPassword()));
 		userinfoServiceImpl.save(userinfo, roleIds);
-		return "rediect:findAll";
+		return "redirect:findAll";
 	}
 	
 	@RequestMapping("delete")
@@ -45,7 +45,7 @@ public class UserinfoController {
 	@RequestMapping("findAll")
 	public String findAll(ModelMap map) {
 		List list=userinfoServiceImpl.findAll();
-		map.put("lidt",list);
+		map.put("list",list);
 		return "admin/userinfo/list";
 	}
 	
@@ -53,7 +53,7 @@ public class UserinfoController {
 	public String findById(String userPhone,ModelMap map) {
 		Userinfo info=userinfoServiceImpl.findById(userPhone);
 		map.put("info", info);
-		return "forword:goInput";
+		return "forward:goInput";
 	}
 	
 	@RequestMapping("goInput")
