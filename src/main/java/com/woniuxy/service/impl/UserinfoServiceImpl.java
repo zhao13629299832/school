@@ -23,13 +23,13 @@ public class UserinfoServiceImpl implements IUserinfoService {
 	private UserinforoleMapper userinforoleMapper;
 	
 	@Transactional
-	public void save(Userinfo userinfo,Integer[] userPhones) {
+	public void save(Userinfo userinfo,Integer[] roleIds) {
 		userinfoMapper.insert(userinfo);
-		if(userPhones!=null)
-			for(int i=0;i<userPhones.length;i++) {
+		if(roleIds!=null)
+			for(int i=0;i<roleIds.length;i++) {
 				UserinforoleKey key=new UserinforoleKey();
 				key.setUserPhone(userinfo.getUserPhone());
-				key.setRoleId(userPhones[i]);
+				key.setRoleId(roleIds[i]);
 				userinforoleMapper.insert(key);
 			}
 	}
@@ -45,16 +45,16 @@ public class UserinfoServiceImpl implements IUserinfoService {
 	}
 
 	@Transactional
-	public void update(Userinfo userinfo,Integer[] userPhones) {
+	public void update(Userinfo userinfo,Integer[] roleIds) {
 		userinfoMapper.updateByPrimaryKeySelective(userinfo);
 		UserinforoleExample example=new UserinforoleExample();
 		example.createCriteria().andUserPhoneEqualTo(userinfo.getUserPhone());
 		userinforoleMapper.deleteByExample(example);
-		if(userPhones!=null)
-			for(int i=0;i<userPhones.length;i++) {
+		if(roleIds!=null)
+			for(int i=0;i<roleIds.length;i++) {
 				UserinforoleKey key=new UserinforoleKey();
 				key.setUserPhone(userinfo.getUserPhone());
-				key.setRoleId(userPhones[i]);
+				key.setRoleId(roleIds[i]);
 				userinforoleMapper.insert(key);
 			}
 	}
