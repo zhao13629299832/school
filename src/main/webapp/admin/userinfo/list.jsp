@@ -20,6 +20,10 @@
 </head>
 <body>
 <div class="container">
+<form method="post" action="findAll">
+userPhone:<input type="text" name="userPhone" value="${userinfo.userPhone }">
+userName:<input type="text" name="userName" value="${userinfo.userName }">
+<button type="submit" class="btn btn-primary">Go</button>
 <table class="table table-striped">
   <tr>
   <td class="active">账号</td>
@@ -43,8 +47,27 @@
 </tr>
 </c:forEach>
 </table>
-
+<table>
+<tr>
+  <td class="active"><button type="button" onclick="go(1)" class="btn btn-primary">First</button></td>
+  <td class="success"><button type="button" onclick="go(${page.pageNow+1})" class="btn btn-primary">Next</button></td>
+  <td class="success"><button type="button" onclick="go(${page.pageNow-1})" class="btn btn-primary">Before</button></td>
+  <td class="success"><button type="button" onclick="go(${page.pageCount})" class="btn btn-primary">End</button></td>
+  <td class="success">pageNow:<input type="text" size="1" value="${page.pageNow}" name="pageNow"></td>
+  <td class="success">limit:<input type="text" size="1" value="${page.limit }" name="limit"></td>
+  <td class="success">共${page.count}条  共${page.pageCount}页</td>
+  <td class="danger"><button type="submit" class="btn btn-primary">Go</button></td>
+  </td>
+</tr>
+</table>
+</form>
 <a href="goInput"><button type="button" class="btn btn-primary">Save</button></a>
 </div>
 </body>
 </html>
+<script>
+	function go(pageNow){
+		$("input[name=pageNow]").val(pageNow);
+		document.forms[0].submit();
+	}
+</script>

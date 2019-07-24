@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.woniuxy.entity.PageBean;
 import com.woniuxy.entity.Userinfo;
 import com.woniuxy.service.IRoleService;
 import com.woniuxy.service.IUserinfoService;
@@ -43,9 +44,12 @@ public class UserinfoController {
 	}
 	
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map) {
-		List list=userinfoServiceImpl.findAll();
+	public String findAll(ModelMap map,Userinfo userinfo,PageBean page) {
+		List list=userinfoServiceImpl.findAll(userinfo,page);
 		map.put("list",list);
+		map.put("page",page);
+		map.put("userinfo",userinfo);
+		
 		return "admin/userinfo/list";
 	}
 	

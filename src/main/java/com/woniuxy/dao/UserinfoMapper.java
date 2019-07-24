@@ -4,6 +4,7 @@ import com.woniuxy.entity.Userinfo;
 import com.woniuxy.entity.UserinfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface UserinfoMapper {
 	Userinfo login(Userinfo userinfo);
@@ -18,7 +19,7 @@ public interface UserinfoMapper {
 
     int insertSelective(Userinfo record);
 
-    List<Userinfo> selectByExample(UserinfoExample example);
+    List<Userinfo> selectByExample(UserinfoExample example,RowBounds rb);
 
     Userinfo selectByPrimaryKey(String userPhone);
 
