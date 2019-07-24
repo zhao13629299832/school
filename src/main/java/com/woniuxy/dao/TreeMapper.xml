@@ -10,7 +10,7 @@
     <result column="tree_isdelete" jdbcType="BIT" property="treeIsdelete" />
   </resultMap>
   
-  <select id="findTreeWithUid" resultMap="BaseResultMap">
+  <select id="findTreeWithUserPhone" resultMap="BaseResultMap">
 	SELECT * FROM tree WHERE tree_id IN(
 	SELECT tree_id FROM roletree WHERE role_id IN
 	(SELECT role_id FROM userinforole WHERE user_phone=#{userPhone}))

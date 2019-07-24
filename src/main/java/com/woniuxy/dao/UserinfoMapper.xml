@@ -10,7 +10,7 @@
   </resultMap>
   
   <resultMap type="com.woniuxy.entity.Userinfo" id="findWithTree">
-  	<collection property="trees" column="user_phone" select="com.woniuxy.dao.TreeMapper.findTreeWithUid"></collection>
+  	<collection property="trees" column="user_phone" select="com.woniuxy.dao.TreeMapper.findTreeWithUserPhone"></collection>
   </resultMap>
   
   <select id="login" resultMap="findWithTree" parameterType="com.woniuxy.entity.Userinfo">

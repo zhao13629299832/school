@@ -28,12 +28,11 @@ public class LoginController {
 		}
 		Userinfo foo=loginServiceImpl.login(info);
 			if(foo==null) {
-				System.out.println("vvv");
 				map.put("error", "输入账号或密码错误");
 				return "login";
 			}else {
 				ObjectMapper objectMapper=new ObjectMapper();
-				String json=objectMapper.writeValueAsString(info);
+				String json=objectMapper.writeValueAsString(foo.getTrees());
 				session.setAttribute("json", json);
 				session.setAttribute("info", info);
 				return "redirect:/admin/index.jsp";
