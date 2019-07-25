@@ -5,6 +5,10 @@
     <id column="role_id" jdbcType="INTEGER" property="roleId" />
     <id column="tree_id" jdbcType="INTEGER" property="treeId" />
   </resultMap>
+  
+  <select id="findByRoleId" resultMap="BaseResultMap">
+  select * from roletree where role_id=#{roleId}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

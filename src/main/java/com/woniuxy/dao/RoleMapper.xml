@@ -7,6 +7,10 @@
     <result column="role_isdelete" jdbcType="BIT" property="roleIsdelete" />
   </resultMap>
   
+  <resultMap type="com.woniuxy.entity.Role" id="BaseResultMapWithTree" extends="BaseResultMap">
+  <collection property="trees" column="role_id" select="com.woniuxy.dao.RoletreeMapper.findByRoleId"></collection>
+  </resultMap>
+  
   <select id="findByUid" resultMap="BaseResultMap">
   SELECT * FROM role WHERE role_id IN(SELECT role_id FROM userinforole WHERE user_phone=#{userPhone})
   </select>
@@ -85,7 +89,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMapWithTree">
     select 
     <include refid="Base_Column_List" />
     from role
@@ -101,7 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.woniuxy.entity.Role">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.woniuxy.entity.Role">
     insert into role (role_id, role_name, role_isdelete
       )
     values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=INTEGER}, #{roleIsdelete,jdbcType=BIT}

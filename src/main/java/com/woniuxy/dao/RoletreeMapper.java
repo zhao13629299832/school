@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoletreeMapper {
+	List findByRoleId(Integer roleId);
+	
     long countByExample(RoletreeExample example);
 
     int deleteByExample(RoletreeExample example);

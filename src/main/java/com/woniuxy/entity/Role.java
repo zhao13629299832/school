@@ -1,7 +1,19 @@
 package com.woniuxy.entity;
 
+import java.util.List;
+
 public class Role {
-    private Integer roleId;
+	private List trees;
+	
+    public List getTrees() {
+		return trees;
+	}
+
+	public void setTrees(List trees) {
+		this.trees = trees;
+	}
+
+	private Integer roleId;
 
     private String roleName;
 
