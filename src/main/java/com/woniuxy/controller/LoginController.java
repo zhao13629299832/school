@@ -23,16 +23,29 @@ public class LoginController {
 	
 	@RequestMapping("login")
 	public String login(Userinfo info,ModelMap map,HttpSession session) throws Exception {
-		if(info.getUserPassword()!=null) {
-			info.setUserPassword(MD5.md5s(info.getUserPassword()));
-		}
-		Userinfo foo=loginServiceImpl.login(info);
-			if(foo==null) {
-				map.put("error", "输入账号或密码错误");
-				return "login";
+//		if(info.getUserPassword()!=null) {
+//			info.setUserPassword(MD5.md5s(info.getUserPassword()));
+//		}
+//		Userinfo foo=loginServiceImpl.login(info);
+//			if(foo==null) {
+//				map.put("error", "输入账号或密码错误");
+//				return "login";
+//			}else {
+//				ObjectMapper objectMapper=new ObjectMapper();
+//				String json=objectMapper.writeValueAsString(foo.getTrees());
+//				session.setAttribute("json", json);
+//				session.setAttribute("info", info);
+//				return "redirect:/admin/index.jsp";
+//			}
+			if(info.getUserPassword()!=null)
+				info.setUserPassword(MD5.md5s(info.getUserPassword()));
+			info = loginServiceImpl.login(info);
+			if(info==null) {
+				map.put("error", "用户名密码不正确");
+				return "index";
 			}else {
-				ObjectMapper objectMapper=new ObjectMapper();
-				String json=objectMapper.writeValueAsString(foo.getTrees());
+				ObjectMapper objectMapper = new ObjectMapper();
+				String json = objectMapper.writeValueAsString(info.getTrees());
 				session.setAttribute("json", json);
 				session.setAttribute("info", info);
 				return "redirect:/admin/index.jsp";
